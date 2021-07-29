@@ -1,21 +1,21 @@
 pm=medfilt1(pm25acu); %Filtro de medianas a la variable objetivo 
-pm=pm25acu; % Denominaci髇 de la variable objetivo como "pm"
+pm=pm25acu; % Denominaci贸n de la variable objetivo como "pm"
 
 input= inputs; %Matriz "inputs" con variables de entrada  
            
 in=transpose(input); %Se transpone la matriz, eso depende de la forma...
 ...inicial (pero el tiempo avanza en columnas)
 
-%Creaci髇 de red y estructura
+%Creaci贸n de red y estructura
 net=network;
 net.name='RED3';
-net.numInputs=15;       %N鷐ero de entradas 
-net.numLayers=2;       %N鷐ero de capas 
+net.numInputs=15;       %N煤mero de entradas 
+net.numLayers=2;       %N煤mero de capas 
 net.biasConnect=[1;0];     %Conexion de bias a cada neurona de cada capa
 net.inputConnect=[1 1 1 1 1 1 1 1 1 1 1 1 1 1 1;0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]; %Conexiones de cada entrada a cada capa
 net.layerConnect=[0 1;1 0];     %Conectar la capa 1 con la 2
 net.outputConnect=[0 1];        %Conectar la capa 2 a la salida de la red
-net.layerWeights{1,2}.delays =1;  %Delay a la realimentaci髇
+net.layerWeights{1,2}.delays =1;  %Delay a la realimentaci贸n
 
 %Capa de entrada
 net.inputs{1}.exampleInput=in(1,:);      %ingreso de datos de entrada
@@ -55,26 +55,26 @@ for i=1:1:15
 end
 
 net.initFcn='initlay'; %La red se inicializa de acuerdo a las funciones...
-...de inicializaci髇 asignada a cada capa em net.initParam
+...de inicializaci贸n asignada a cada capa em net.initParam
 
 %Capa oculta
 net.layers{1}.name='capa oculta';
 net.layers{1}.size=9;               %Cantidad de neuronas
-net.layers{1}.transferFcn='tansig'; %Funci髇 de transferencia de neuronas 
-net.layers{1}.initFcn='initnw';     %Funci髇 de inicializaci髇 de pesos...
+net.layers{1}.transferFcn='tansig'; %Funci贸n de transferencia de neuronas 
+net.layers{1}.initFcn='initnw';     %Funci贸n de inicializaci贸n de pesos...
 ...y bias de acuerdo a Nguyen-Widrow
 
 %Capa de salida
 net.layers{2}.name='capa de salida';
 net.layers{2}.size=1;                 %Cantidad de neuronas de salida 
-net.layers{2}.transferFcn='purelin';  %Funci髇 de transferencia lineal
-net.layers{2}.initFcn='initnw';  %Funci髇 de inicializaci髇 Nguyen-Widrow
+net.layers{2}.transferFcn='purelin';  %Funci贸n de transferencia lineal
+net.layers{2}.initFcn='initnw';  %Funci贸n de inicializaci贸n Nguyen-Widrow
 
-net.performFcn='mse';      %Funci髇 de rendimiento error cuadr醫ico medio
-net.trainFcn='trainlm';      %Funci髇 de entrenamiento Levenberg-Marquardt
+net.performFcn='mse';      %Funci贸n de rendimiento error cuadr谩tico medio.
+net.trainFcn='trainlm';      %Funci贸n de entrenamiento Levenberg-Marquardt
 net.divideFcn='dividerand';     %Divide set de entrada en entrenamiento...
-...,test y validaci髇 al azar (dafault 70%,15%,15%)
-net.plotFcns={'plotperform','plottrainstate', 'plotregression'};%Gr醘icas
+...,test y validaci贸n al azar (dafault 70%,15%,15%)
+net.plotFcns={'plotperform','plottrainstate', 'plotregression'};%Gr谩ficas
 
 %view(net);           %Visualizar la estructura de la red
 net=init(net); %Inicializa la red para dar valores de pesos y sesgos...
@@ -85,21 +85,21 @@ tar=transpose(target); % Se transpone (idem con variables de entrada)
 [T,PS2]=mapminmax(tar); % Preprocesamiento a la variable objetivo
 
 
-%Par醡etros de funci髇 de entrenamiento
-net.trainParam.epochs=1000; %M醲ima cantidad de 閜ocas (1000)
+%Par谩metros de funci贸n de entrenamiento
+net.trainParam.epochs=1000; %M谩xima cantidad de 茅pocas (1000)
 net.trainParam.goal=0;       %Meta de performance (0)
-net.trainParam.max_fail=6;   %M醲ima cantidad de fallas consecutivas en...
-...la validaci髇 (6) 
-net.trainParam.min_grad=1e-7; %M韓imo gradiente de performance (1e-7)
+net.trainParam.max_fail=6;   %M谩xima cantidad de fallas consecutivas en...
+...la validaci贸n (6) 
+net.trainParam.min_grad=1e-7; %M铆nimo gradiente de performance (1e-7)
 net.trainParam.mu=0.001; %Ganancia de entrenamiento inicial (0.001)
 net.trainParam.mu_dec=0.1; %Factor de decrecimiento de la ganancia (0.1)...
 ..., va de 0 a 1
 net.trainParam.mu_inc=10;    %Factor de crecimiento de la ganancia (10)
-net.trainParam.mu_max=1e10;     %M醲ima ganancia (1e10)
-net.trainParam.time=inf     %Tiempo m醲imo de entrenamiento (inf)
+net.trainParam.mu_max=1e10;     %M谩xima ganancia (1e10)
+net.trainParam.time=inf     %Tiempo m谩ximo de entrenamiento (inf)
 net.trainParam.showWindow = true;   %Muestra el "Graphical User Interface" 
-net.trainParam.showCommandLine = true;   %Muestra las l韓eas de comando 
-net.trainParam.show= 2;   %Muestra los par醡etros cada 2 iteraciones
+net.trainParam.showCommandLine = true;   %Muestra las l铆neas de comando 
+net.trainParam.show= 2;   %Muestra los par谩metros cada 2 iteraciones
 
 [net,tr]=train(net,in,T);     %Entrenamiento
 
