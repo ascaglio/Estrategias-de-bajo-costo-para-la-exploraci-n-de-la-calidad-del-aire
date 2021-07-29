@@ -1,4 +1,4 @@
-pm=medfilt1(pm25acu); %Filtro de medianas a la variable objetivo 
+pm=medfilt1(pm25acu); %Filtro de medianas a la variable objetivo. 
 pm=pm25acu; % Denominación de la variable objetivo como "pm"
 
 input= inputs_caba; %Matriz "inputs" con variables de entrada  
