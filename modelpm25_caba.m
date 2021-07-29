@@ -18,7 +18,7 @@ net.outputConnect=[0 1];        %Conectar la capa 2 a la salida de la red
 net.layerWeights{1,2}.delays =1;  %Delay a la realimentación
 
 %Capa de entrada
-net.inputs{1}.exampleInput=in(1,:);      %ingreso de datos de entrada
+net.inputs{1}.exampleInput=in(1,:);      %ingreso de datos de entrada.
 net.inputs{1}.name='PM10acu';            %nombre de cada variable.        
 net.inputs{2}.exampleInput=in(2,:);
 net.inputs{2}.name='PM10apra';
