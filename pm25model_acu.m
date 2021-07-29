@@ -1,7 +1,7 @@
 pm=medfilt1(pm25acu); %Filtro de medianas a la variable objetivo 
 pm=pm25acu; % Denominación de la variable objetivo como "pm"
 
-input= inputs; %Matriz "inputs" con variables de entrada  
+input= inputs_caba; %Matriz "inputs" con variables de entrada  
            
 in=transpose(input); %Se transpone la matriz, eso depende de la forma...
 ...inicial (pero el tiempo avanza en columnas)
